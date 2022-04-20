@@ -5,14 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width
     const  initial-scale=1.0">
-    <title>Date Calculataor</title>
+    <title>JavaScript Date Calculataor</title>
 </head>
-<style>
-    input{
-        margin-bottom: 15px;
-    }
-</style>
+<style> input{margin-bottom: 15px;} </style>
 <body>
+    <h1>Date Calculator</h1>
     <div>
         <label for="start">Start Date:</label>
         <input type="date" id="start">
@@ -23,14 +20,14 @@
     </div>
     <input type="submit" value="Calculate" onclick="calc()">
     <div>
-        <label for="result">Differences (days)</label>
-        <input type="text" disabled id="result">
+        <label for="result">Differences (days)</label><br>
+        <input type="text" disabled id="result" style="width: 300px;">
     </div>
     <p id="error"></p>
 </body>
 <script>
     function calc(){
-        if (document.getElementById("start").value == "" && document.getElementById("stop").value == "") {
+        if (document.getElementById("start").value == "" || document.getElementById("stop").value == "") {
             document.getElementById("error").innerHTML = "Enter Start and Stop date";
         }
         //GETTING THE VALUE
@@ -47,93 +44,52 @@
         //Days from start month to the end of the year
         daysFromStartMonth = 0;
         for(let i = (1 + startMonth); i <= 12; i++){
-            if(i == 1){daysFromStartMonth = 31 + daysFromStartMonth;}
-            if(i == 2){
-                if((startYear)%4 == 0){daysFromStartMonth = 29 + daysFromStartMonth;}
-                if((startYear)%4 != 0){daysFromStartMonth = 28 + daysFromStartMonth;}
+            if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){ daysFromStartMonth = 31 + daysFromStartMonth; }
+            if(i==4 || i==6 || i==9 || i==11){ daysFromStartMonth = 30 + daysFromStartMonth; }
+            if(i==2){
+                if((startYear)%4 == 0){ daysFromStartMonth = 29 + daysFromStartMonth; }
+                if((startYear)%4 != 0){ daysFromStartMonth = 28 + daysFromStartMonth; }
             }
-            if(i == 3){daysFromStartMonth = 31 + daysFromStartMonth;}
-            if(i == 4){daysFromStartMonth = 30 + daysFromStartMonth;}
-            if(i == 5){daysFromStartMonth = 31 + daysFromStartMonth;}
-            if(i == 6){daysFromStartMonth = 30 + daysFromStartMonth;}
-            if(i == 7){daysFromStartMonth = 31 + daysFromStartMonth;}
-            if(i == 8){daysFromStartMonth = 31 + daysFromStartMonth;}
-            if(i == 9){daysFromStartMonth = 30 + daysFromStartMonth;}
-            if(i == 10){daysFromStartMonth = 31 + daysFromStartMonth;}
-            if(i == 11){daysFromStartMonth = 30 + daysFromStartMonth;}
-            if(i == 12){daysFromStartMonth = 31 + daysFromStartMonth;}
         } 
 
         //Days before stop month from the start of the year
         daysBeforeStopMonth = 0;
         for(let i=1; i < (stopMonth); i++){
-            if(i == 1){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
+            if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){ daysBeforeStopMonth = 31 + daysBeforeStopMonth; }
+            if(i==4 || i==6 || i==9 || i==11){ daysBeforeStopMonth = 30 + daysBeforeStopMonth; }
             if(i == 2){
-                if((stopYear)%4 == 0){daysBeforeStopMonth = 29 + daysBeforeStopMonth;}
-                if((stopYear)%4 != 0){daysBeforeStopMonth = 28 + daysBeforeStopMonth;}
+                if((stopYear)%4 == 0){ daysBeforeStopMonth = 29 + daysBeforeStopMonth; }
+                if((stopYear)%4 != 0){ daysBeforeStopMonth = 28 + daysBeforeStopMonth; }
             }
-            if(i == 3){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
-            if(i == 4){daysBeforeStopMonth = 30 + daysBeforeStopMonth;}
-            if(i == 5){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
-            if(i == 6){daysBeforeStopMonth = 30 + daysBeforeStopMonth;}
-            if(i == 7){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
-            if(i == 8){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
-            if(i == 9){daysBeforeStopMonth = 30 + daysBeforeStopMonth;}
-            if(i == 10){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
-            if(i == 11){daysBeforeStopMonth = 30 + daysBeforeStopMonth;}
-            if(i == 12){daysBeforeStopMonth = 31 + daysBeforeStopMonth;}
         }
-        
+    
         //days btw start and stop year
         daysInYear = 0;
         for(let i=(startYear + 1);i<(stopYear);i++){
-            if(i%4 == 0){
-                daysInYear = 366 + daysInYear;
-            }
-            if(i%4 != 0){
-                daysInYear = 365 + daysInYear;
-            }
+            if(i%4 == 0){daysInYear = 366 + daysInYear;}
+            if(i%4 != 0){daysInYear = 365 + daysInYear;}
         }
         
         //days btw months of the same year
         daysBtwMonthSM = 0;
         if(startYear == stopYear){
             for(let i=(1 + startMonth);i < stopMonth;i++){
-                if(i == 1){daysBtwMonthSM = 31 + daysBtwMonthSM;}
+                if(i==1 || i==3 || i==5 || i==7 || i==8 || i==10 || i==12){ daysBtwMonthSM = 31 + daysBtwMonthSM; }
+                if(i==4 || i==6 || i==9 || i==11){ daysBtwMonthSM = 30 + daysBtwMonthSM; }
                 if(i == 2){
-                    if((startYear)%4 == 0){daysBtwMonthSM = 29 + daysBtwMonthSM;}
-                    if((startYear)%4 != 0){daysBtwMonthSM = 28 + daysBtwMonthSM;}
+                    if((startYear)%4 == 0){ daysBtwMonthSM = 29 + daysBtwMonthSM; }
+                    if((startYear)%4 != 0){ daysBtwMonthSM = 28 + daysBtwMonthSM; }
                 }
-                if(i == 3){daysBtwMonthSM = 31 + daysBtwMonthSM;}
-                if(i == 4){daysBtwMonthSM = 30 + daysBtwMonthSM;}
-                if(i == 5){daysBtwMonthSM = 31 + daysBtwMonthSM;}
-                if(i == 6){daysBtwMonthSM = 30 + daysBtwMonthSM;}
-                if(i == 7){daysBtwMonthSM = 31 + daysBtwMonthSM;}
-                if(i == 8){daysBtwMonthSM = 31 + daysBtwMonthSM;}
-                if(i == 9){daysBtwMonthSM = 30 + daysBtwMonthSM;}
-                if(i == 10){daysBtwMonthSM = 31 + daysBtwMonthSM;}
-                if(i == 11){daysBtwMonthSM = 30 + daysBtwMonthSM;}
-                if(i == 12){daysBtwMonthSM = 31 + daysBtwMonthSM;}
             }
         }
         
         //Checking the total days in start month
-        daysInStartMonth = 0;
-        if(startMonth == 1){daysInStartMonth = 31;}
+        if(startMonth==1 || startMonth==3 || startMonth==5 || startMonth==7 || startMonth==8 || startMonth==10 || startMonth==12){daysInStartMonth = 31;}
+        if(startMonth==4 || startMonth==6 || startMonth==9 || startMonth==11){ daysInStartMonth = 30; }
         if(startMonth == 2){
-            if(startYear%4 == 0){daysInStartMonth = 29;}
-            if(startYear%4 != 0){daysInStartMonth = 28;}
+            if(startYear%4 == 0){ daysInStartMonth = 29; }
+            if(startYear%4 != 0){ daysInStartMonth = 28; }
         }
-        if(startMonth == 3){daysInStartMonth = 31;}
-        if(startMonth == 4){daysInStartMonth = 30;}
-        if(startMonth == 5){daysInStartMonth = 31;}
-        if(startMonth == 6){daysInStartMonth = 30;}
-        if(startMonth == 7){daysInStartMonth = 31;}
-        if(startMonth == 8){daysInStartMonth = 31;}
-        if(startMonth == 9){daysInStartMonth = 30;}
-        if(startMonth == 10){daysInStartMonth = 31;}
-        if(startMonth == 11){daysInStartMonth = 30;}
-        if(startMonth == 12){daysInStartMonth = 31;}
 
         //Days remaining in start month
         daysRemInStartMonth = (daysInStartMonth - startDay);
@@ -144,24 +100,29 @@
         //Total days in Last year
         daysInLastYear = (daysBeforeStopMonth + stopDay);
 
-        //Total days btw days
         //total days for same year
+        
+        function days(days,placement){
+            if(days == 0){ placement.value = "Same dates"; }
+            if(days == 1){ placement.value = days + " day"; }
+            if(days > 1){ placement.value = days + " days"; }
+        }
         if(stopYear == startYear){
             //total days for SAME MONTH SAME YEAR
             if(startMonth == stopMonth){
                 totalDays = (stopDay - startDay);
-                result.value = (totalDays + " days");
+                days(totalDays,result);
             }
             //total days for DIFFERENT MONTH SAME YEAR
             if(startMonth != stopMonth){
                 totalDays = (daysRemInStartMonth + daysBtwMonthSM + stopDay);
-                result.value = (totalDays + " days");
+                days(totalDays,result);
             }
         }
         //total days for different years
         if(stopYear != startYear){
             totalDays = (daysInFirstYear + daysInYear + daysInLastYear);
-            result.value = (totalDays + " days");
+            days(totalDays,result);
         }
     }
 </script>
