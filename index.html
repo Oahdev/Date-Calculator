@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width
+    const  initial-scale=1.0">
+    <title>JavaScript Date Calculataor</title>
+</head>
+<style> input{margin-bottom: 15px;} </style>
+<body>
+    <h1>Date Calculator</h1>
+    <div>
+        <label for="start">Start Date:</label>
+        <input type="date" id="start">
+    </div>
+    <div>
+        <label for="stop">Stop Date:</label>
+        <input type="date" id="stop">
+    </div>
+    <input type="submit" value="Calculate" onclick="calc()">
+    <div>
+        <label for="result">Differences (days)</label><br>
+        <input type="text" disabled id="result" style="width: 300px;">
+    </div>
+    <p id="error"></p>
+</body>
+<script src="./date_calculator_javascript.js"></script>
+</html>
